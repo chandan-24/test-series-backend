@@ -1,0 +1,35 @@
+{
+  "name": "test-series-backend",
+  "version": "1.0.0",
+  "description": "Online Test series WebApp backend system",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "lint-fix": "./node_modules/eslint/bin/eslint.js . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chandan-24/test-series-backend.git"
+  },
+  "author": "chandan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chandan-24/test-series-backend/issues"
+  },
+  "homepage": "https://github.com/chandan-24/test-series-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "harperive": "^1.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.11.0"
+  }
+}
