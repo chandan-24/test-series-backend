@@ -12,6 +12,16 @@ const testSeries = {
       }
     });
   },
+
+  question: function(req, res) {
+    testSeriesService.question(req, res, (err, resp) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.json(resp);
+      }
+    });
+  }
 };
 
 module.exports = testSeries;
