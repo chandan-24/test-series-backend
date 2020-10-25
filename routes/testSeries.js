@@ -23,6 +23,26 @@ const testSeries = {
     });
   },
 
+  getTestBySection: function(req, res) {
+    testSeriesService.getTestBySection(req, res, (err, resp) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.json(resp);
+      }
+    });
+  },
+
+  getTestBySubSection: function(req, res) {
+    testSeriesService.getTestBySubSection(req, res, (err, resp) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.json(resp);
+      }
+    });
+  },
+
   getAllQuestions: function (req, res) {
     testSeriesService.getAllQuestions(req, res, (err, resp) => {
       if (err) {

@@ -35,6 +35,36 @@ const testSeries = {
     );
   },
 
+  getTestBySection: function(req, res, cb) {
+    client.searchByValue(
+      {
+        table: 'questions',
+        searchAttribute: 'section',
+        searchValue: req.params.section,
+        attributes: ['*'],
+      },
+      (err, response) => {
+        if(err) cb(err);
+        else cb(null, response);
+      }
+    );
+  },
+
+  getTestBySubSection: function(req, res, cb) {
+    client.searchByValue(
+      {
+        table: 'questions',
+        searchAttribute: 'sub_section',
+        searchValue: req.params.subSection,
+        attributes: ['*'],
+      },
+      (err, response) => {
+        if(err) cb(err);
+        else cb(null, response);
+      }
+    );
+  },
+
   getAllQuestions: function(req, res, cb){
     const query = 'select * from assessments.questions';
     client.query(
