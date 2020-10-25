@@ -3,91 +3,63 @@
 const harperive = require('harperive');
 const util = require('util');
 
+const Questions = require('../db/operation/questions');
+const Tests = require('../db/operation/tests');
 const harperDbConfig = require('../config').harperDb;
  
 const Client = harperive.Client;
 const client = new Client(harperDbConfig);
+const questions = new Questions(client);
+const tests = new Tests(client);
 
 const testSeries = {
-  getAllTests: function(req, res, cb){
-    const query = 'select * from assessments.tests';
-    client.query(
-      query,
-      (err, response) => {
-        if(err) cb(err);
-        else cb(null, response);
-      }
-    );
+  getAllTests: function(){
+    return new Promise((resolve, reject) => {
+      tests.getAll()
+        .then((resp) => resolve(resp))
+        .catch((err) => reject(err));
+    });
   },
 
-  getTestById: function(req, res, cb) {
-    client.searchByValue(
-      {
-        table: 'questions',
-        searchAttribute: 'test_id',
-        searchValue: req.params.testId,
-        attributes: ['*'],
-      },
-      (err, response) => {
-        if(err) cb(err);
-        else cb(null, response);
-      }
-    );
+  getQuestionsByTestId: function(testId) {
+    return new Promise((resolve, reject) => {
+      questions.getByAttribute('test_id', testId)
+        .then((resp) => resolve(resp))
+        .catch((err) => reject(err));
+    });
   },
 
-  getTestBySection: function(req, res, cb) {
-    client.searchByValue(
-      {
-        table: 'questions',
-        searchAttribute: 'section',
-        searchValue: req.params.section,
-        attributes: ['*'],
-      },
-      (err, response) => {
-        if(err) cb(err);
-        else cb(null, response);
-      }
-    );
+  getQuestionsBySection: function(section) {
+    return new Promise((resolve, reject) => {
+      questions.getByAttribute('section', section)
+        .then((resp) => resolve(resp))
+        .catch((err) => reject(err));
+    });
   },
 
-  getTestBySubSection: function(req, res, cb) {
-    client.searchByValue(
-      {
-        table: 'questions',
-        searchAttribute: 'sub_section',
-        searchValue: req.params.subSection,
-        attributes: ['*'],
-      },
-      (err, response) => {
-        if(err) cb(err);
-        else cb(null, response);
-      }
-    );
+  getQuestionsBySubSection: function(subSection) {
+    return new Promise((resolve, reject) => {
+      questions.getByAttribute('sub_section', subSection)
+        .then((resp) => resolve(resp))
+        .catch((err) => reject(err));
+    });
   },
 
-  getAllQuestions: function(req, res, cb){
-    const query = 'select * from assessments.questions';
-    client.query(
-      query,
-      (err, response) => {
-        if(err) cb(err);
-        else cb(null, response);
-      }
-    );
+  getAllQuestions: function(){
+    return new Promise((resolve, reject) => {
+      questions.getAll()
+        .then((resp) => resolve(resp))
+        .catch((err) => reject(err));
+    });
   },
 
-  saveQuestion: function(req, res, cb){
-    util.log('[ADD QUESTION] :: question(s) recieved :: ', req.body);
-    client.insert(
-      {
-        table: 'questions',
-        records: req.body,
-      },
-      (err, response) => {
-        if(err) cb(err);
-        else cb(null, response);
-      }
-    );
+  saveQuestion: function(data){
+    util.log('[ADD QUESTION] :: question(s) recieved :: ', data);
+    return new Promise((resolve, reject) => {
+      questions.save(data)
+        .then((resp) => resolve(resp))
+        .catch((err) => reject(err));
+    });
   }
 };
 

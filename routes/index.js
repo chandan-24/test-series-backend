@@ -11,11 +11,11 @@ module.exports = function(app) {
 
   app.get(base + '/tests', testSeries.getAllTests);
 
-  app.get(base + '/test/:testId', testSeries.getTestById);
+  app.get(base + '/questions/:testId', testSeries.getTestById);
 
-  app.get(base + '/test/section/:section', testSeries.getTestBySection);
+  app.get(base + '/questions/section/:section', testSeries.getTestBySection);
 
-  app.get(base + '/test/subsection/:subSection', testSeries.getTestBySubSection);
+  app.get(base + '/questions/subsection/:subSection', testSeries.getTestBySubSection);
 
   app.get(base + '/questions', testSeries.getAllQuestions);
 
